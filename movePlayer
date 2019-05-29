@@ -1,0 +1,79 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+public class movePlayer : MonoBehaviour {
+	private Animator player;
+	private float velocity = 50.0f;
+	private string animation ="idle";
+	private bool jumping = false;
+	private int cont = 0;
+
+	void Start()
+	{
+		// get component Animator
+		player = (Animator) transform.GetComponent<Animator>();
+		// play animation
+		player.Play(animation);
+	}
+
+	void Update()
+	{
+		// is not jumping?
+		if (!jumping) {
+			// UpArrow then running
+			if (Input.GetKey (KeyCode.UpArrow)) {			
+				player.Play ("running");
+				// translate new position
+				player.transform.Translate (Vector3.forward * velocity * Time.deltaTime);
+			}
+			// DownArrow then running
+			if (Input.GetKey (KeyCode.DownArrow)) {
+				player.Play ("running");
+				// translate new position
+				player.transform.Translate (Vector3.back * velocity * Time.deltaTime);
+			}
+			// RightArrow
+			if (Input.GetKey (KeyCode.RightArrow)) {
+				player.Play ("running");
+				// rotate model
+				player.transform.Rotate (Vector3.up, velocity   * Time.deltaTime);
+			}
+			// LeftArrow
+			if (Input.GetKey (KeyCode.LeftArrow)) {
+				player.Play ("running");
+				// rotate model
+				player.transform.Rotate (Vector3.up, -velocity   * Time.deltaTime);
+			}
+			
+			// nothing pressed, then idle
+			if (!Input.anyKey)
+			{
+				player.Play("idle");
+			}
+		}
+		// jumping
+		if ((Input.GetKey(KeyCode.Space)&&(!jumping)))
+		{
+			player.Play("jumping");
+		}
+
+}
+
+	// This C# function can be called by an Animation Event
+	public void PrintFloat (float theValue) {
+		Debug.Log ("PrintFloat is called with a value of "+ theValue );
+	}
+
+	// This C# function can be called by an Animation Event
+	public void isJumping (float theValue) {
+		Debug.Log ("Jumping: "+ theValue );
+		if (theValue == 1)
+			jumping = true;
+		if (theValue == 2)
+			jumping = false;
+	}
+
+
+}
