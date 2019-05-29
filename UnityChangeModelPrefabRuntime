@@ -1,0 +1,37 @@
+// Rogério B. de Andrade (rogerio.sis.proj@gmail.com)
+// For the moving prefab, associate with scrtip movePlayer
+void OnGUI() {
+    // create button for choice
+		if (GUI.Button (new Rect (50, 40, 120, 30), "Buzz")) {			
+			try{
+        // destroy all prefab of model of scene
+				Destroy(GameObject.Find("Pbuzz(Clone)"));
+				Destroy(GameObject.Find("Phulk(Clone)"));	
+			}
+			catch(Exception erro){
+			}
+			finally{
+				// load prefab Pbuzz from resources. 
+				prefab = (GameObject)Resources.Load("Pbuzz", typeof(GameObject));
+        // instantiate from prefab at position 0,0,0
+				Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);
+			}			
+		}
+    
+    // create other button
+		if (GUI.Button (new Rect (50, 70, 120, 30), "Hulk")) {
+			try{
+        // destroy all prefab of model of scene
+				Destroy(GameObject.Find("Pbuzz(Clone)"));
+				Destroy(GameObject.Find("Phulk(Clone)"));	
+			}
+			catch(Exception erro){
+			}
+			finally{				
+        // load prefab Pbuzz from resources. 
+				prefab = (GameObject)Resources.Load("Phulk", typeof(GameObject));
+        // instantiate from prefab at position (0,0,0) 
+				Instantiate (prefab, new Vector3 (0, 0, 0), Quaternion.identity);	
+			}
+		}	
+	}
