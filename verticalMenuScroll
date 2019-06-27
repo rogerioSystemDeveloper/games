@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class init : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+	}
+	// Update is called once per frame
+	void Update () {
+	}
+
+	void OnGUI() {
+		// set position
+		GUILayout.BeginArea(new Rect(0,50,350,400));
+		// set area scrollView
+		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(350), GUILayout.Height(300));
+		// create buttons
+		int tamHeith_y = 30;
+		int y = 0;
+		for (int i = 0; i < 15; i++) {
+					if(GUILayout.Button("Button "+ i,  GUILayout.Width(325), GUILayout.Height(tamHeith_y))){
+						Debug.Log("Button "+i+" selectec!");
+					}
+					y += tamHeith_y;
+				}
+			// end scroll
+			GUILayout.EndScrollView();
+		// end área
+		GUILayout.EndArea ();
+	}
+}
